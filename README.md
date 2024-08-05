@@ -27,6 +27,7 @@ volatility -f MemoryDump_Lab1.raw --profile=Win7SP1x86 cmdscan
 volatility -f MemoryDump_Lab1.raw --profile=Win7SP1x86 consoles
 ```
 Flag encoded: ZmxhZ3t0aDFzXzFzX3RoM18xc3Rfc3Q0ZzMhIX0=
+
 Flag: flag{th1s_1s_th3_1st_st4g3!!}
 
 ## Contributing
