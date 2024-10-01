@@ -48,6 +48,7 @@ gimp 2424.data
 ```
 ###### Adjust width and height of image for reveal 2nd flag
 ![App Screenshot](images/lab1_flag2.png)
+![App Screenshot](images/lab1_flag2-ext.png)
 
 #### Use the following commands to acquire 3rd flag
 
