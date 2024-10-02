@@ -8,11 +8,11 @@ This is solutions of famous memory forensics challenge [MemLabs](https://github.
 
 ```bash
 volatility -f Challenge.raw imageinfo
-volatility -f Challenge.raw --profile=Win7SP1x86 pslist
-volatility -f Challenge.raw --profile=Win7SP1x86 cmdscan
-volatility -f Challenge.raw --profile=Win7SP1x86 consoles
-volatility -f Challenge.raw --profile=Win7SP1x86 envars
-volatility -f Challenge.raw --profile=Win7SP1x86 hashdump
+volatility -f Challenge.raw --profile Win7SP1x86 pslist
+volatility -f Challenge.raw --profile Win7SP1x86 cmdscan
+volatility -f Challenge.raw --profile Win7SP1x86 consoles
+volatility -f Challenge.raw --profile Win7SP1x86 envars
+volatility -f Challenge.raw --profile Win7SP1x86 hashdump
 ```
 Flag: flag{you_are_good_but1_4m_b3tt3r}
 
@@ -24,11 +24,11 @@ Flag: flag{you_are_good_but1_4m_b3tt3r}
 # Detect version of OS
 volatility -f MemoryDump_Lab1.raw imageinfo
 # List all running processes
-volatility -f MemoryDump_Lab1.raw --profile=Win7SP1x86 pslist
+volatility -f MemoryDump_Lab1.raw --profile Win7SP1x86 pslist
 # List all executed CMDlets
-volatility -f MemoryDump_Lab1.raw --profile=Win7SP1x86 cmdscan
+volatility -f MemoryDump_Lab1.raw --profile Win7SP1x86 cmdscan
 # List all stdout
-volatility -f MemoryDump_Lab1.raw --profile=Win7SP1x86 consoles
+volatility -f MemoryDump_Lab1.raw --profile Win7SP1x86 consoles
 ```
 Flag encoded: ZmxhZ3t0aDFzXzFzX3RoM18xc3Rfc3Q0ZzMhIX0=
 
@@ -38,9 +38,9 @@ Flag: flag{th1s_1s_th3_1st_st4g3!!}
 
 ```bash
 # Find PID of mspaint
-volatility2 -f MemoryDump_Lab1.raw --profile=Win7SP1x64 pslist
+volatility2 -f MemoryDump_Lab1.raw --profile Win7SP1x64 pslist
 # Dump run process to a file
-volatility2 -f MemoryDump_Lab1.raw --profile=Win7SP1x64 memdump -p 2424 -D paint/
+volatility2 -f MemoryDump_Lab1.raw --profile Win7SP1x64 memdump -p 2424 -D paint/
 # Change extension of file
 mv 2424.raw 2424.data
 # Open 2424.data file on GIMP
@@ -54,11 +54,11 @@ gimp 2424.data
 
 ```bash
 # List files that loaded to RAM. We only need Alissa's files
-volatility2 -f MemoryDump_Lab1.raw --profile=Win7SP1x64 filescan | grep "Alissa Simpson"
+volatility2 -f MemoryDump_Lab1.raw --profile Win7SP1x64 filescan | grep "Alissa Simpson"
 # Dump important.rar file
-volatility2 -f MemoryDump_Lab1.raw --profile=Win7SP1x64 dumpfiles -Q 0x000000003fac3bc0 -D important
+volatility2 -f MemoryDump_Lab1.raw --profile Win7SP1x64 dumpfiles -Q 0x000000003fac3bc0 -D important
 # Find password of rar file by uppercase of hash of Alissa's password
-volatility2 -f MemoryDump_Lab1.raw --profile=Win7SP1x64 hashdump
+volatility2 -f MemoryDump_Lab1.raw --profile Win7SP1x64 hashdump
 # Unrar file
 unar important.rar (Password required!)
 ```
