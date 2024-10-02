@@ -95,7 +95,8 @@ sudo apt update
 sudo apt install keepassxc
 keepassxc
 ```
-###### Extract Password from Password.png
+###### Extract Password from Password.png with zooming in right-down corner
+![App Screenshot](images/lab2_flag2_passzoom.png)
 ![App Screenshot](images/lab2_flag2_pass.png)
 ###### Open kdbx file using password
 ![App Screenshot](images/lab2_flag2-kdbx.png)
