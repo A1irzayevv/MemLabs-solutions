@@ -194,7 +194,7 @@ volatility2 -f MemoryDump_Lab3.raw --profile=Win7SP1x86 dumpfiles -Q 0x000000000
 
 Check image:
 ![App Screenshot](images/lab3_flag2-steg.png)
-##### Hmm, there is some some noise along th diagonal of the image. But it is not a case with the real one, which I found by image code under the dumped one.
+##### Hmm, there is some some noise along the diagonal of the image. But it is not a case with the real one, which I found online by image code under the dumped one.
 ![App Screenshot](images/lab3_flag2-orig.png)
 Maybe, some data is hidden there :D. Let's check
 ```bash
