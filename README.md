@@ -196,7 +196,7 @@ Check image:
 ![App Screenshot](images/lab3_flag2-steg.png)
 ##### Hmm, there is some some noise along the diagonal of the image. But it is not a case with the real one, which I found online by image code under the dumped one.
 ![App Screenshot](images/lab3_flag2-orig.png)
-Maybe, some data is hidden there :D. Let's check
+##### Maybe, some data is hidden there :D. Let's check
 ```bash
 steghide extract -sf 3memlabs/dumpfiles-suspision1.jpeg
 ```
@@ -210,6 +210,37 @@ Flag = _1s_n0t_3n0ugh}
 
 #### Complete flag of MemLabs Lab 3
 #### Flag = flag1 + flag2 = inctf{0n3_h4lf_1s_n0t_3n0ugh}
+
+## MemLabs Lab 4
+
+#### Use the following commands to acquire the flag
+##### The Hacker stole a lot of information but he also deleted a very important file of mine. Let's analyze cached files
+```bash
+# Detect version of OS
+volatility2 -f MemoryDump_Lab4.raw imageinfo
+# Profile detected. Time to run filescan for cached files
+volatility2 -f MemoryDump_Lab4.raw --profile=Win7SP1x64 filescan
+# After a few greps we can find cached Important.txt. Dump it
+volatility2 -f MemoryDump_Lab4.raw --profile=Win7SP1x64 dumpfiles -Q 0x000000003fc398d0 -D 4memlabs
+# Read the code
+ls dump/
+```
+
+##### Strangely, dumpfiles can not dump anything. It is removed from cache. Let's check mft entry for further info. Maybe $DATA still holds the file if it is small enough :D
+```bash
+# Dump mft
+volatility2 -f MemoryDump_Lab4.raw --profile=Win7SP1x64 mftparser > mft.txt
+# Search for Important.txt
+cat mft.txt | grep -A30 -B10 -i "important.txt"
+```
+Check output:
+![App Screenshot](images/lab4_flag-mft.png)
+##### Let's decode it for our brains :D
+![App Screenshot](images/lab4_flag-chef.png)
+
+#### Flag = inctf{1_is_n0t_EQu4l_7o_2_bUt_th1s_d0s3nt_m4ke_s3ns3}
+#### Goodwork:P
+
 
 ## Contributing
 
