@@ -241,13 +241,60 @@ Check output:
 #### Flag = inctf{1_is_n0t_EQu4l_7o_2_bUt_th1s_d0s3nt_m4ke_s3ns3}
 #### Goodwork:P
 
+## MemLabs Lab 5
+
+#### Use the following commands to acquire the first flag
+##### We received this memory dump from our client recently. Someone accessed his system when he was not there and he found some rather strange files being accessed. Find those files and they might be useful. I quote his exact statement:
+
+```text
+The names were not readable. They were composed of alphabets and numbers but I wasn't able to make out what exactly it was.
+```
+##### Also, he noticed his most loved application that he always used crashed every time he ran it. Was it a virus?
+
+#### Let's start by analyzing processes
+```bash
+# Detect version of OS
+volatility2 -f MemoryDump_Lab5.raw imageinfo
+# Profile detected. Time to list processes
+volatility2 -f MemoryDump_Lab5.raw --profile=Win7SP1x64 pslist
+# We can see 2 notepad.exe and 1 WinRAR.exe. Let's analyze WinRAR
+volatility2 -f MemoryDump_Lab5.raw --profile=Win7SP1x64 cmdline
+# We see that "SW1wb3J0YW50.rar" file executed by WinRAR. Let's dump it
+volatility2 -f MemoryDump_Lab5.raw --profile=Win7SP1x64 filescan | grep "SW1wb3J0YW50.rar"
+# Dump the file to local dir
+volatility2 -f MemoryDump_Lab5.raw --profile=Win7SP1x64 dumpfiles -Q 0x000000003eed56f0 -D dump-lab5
+# As expected, the file was password-protected. Therefore, our next step is to locate the first flag. Let's check IE history
+volatility2 -f MemoryDump_Lab5 --profile=Win7SP1x64 iehistory
+# After a few search we see a base64 encoded named file "ZmxhZ3shIV93M0xMX2QwbjNfU3Q0ZzMtMV8wZl9MNEJfNV9EMG4zXyEhfQ.bmp"
+```
+##### Let's decode it:
+![App Screenshot](images/lab5_flag1.png)
+##### Let's open rar file using this flag
+```bash
+# Use Unrar and enter decoded flag
+unrar x SW1wb3J0YW50.rar
+```
+##### Here is the second flag:
+![App Screenshot](images/lab5_flag2.png)
+##### Instructions said that there is 3rd flag. Last thing we didn't check is duplicate notepad.exe. Let's dump it to local dir
+```bash
+volatility2 --profile=Win7SP1x64 dumpfiles -Q 0x000000003ee9d070 -D dump-lab5
+# Feed it to the ida freeware
+```
+
+##### In IDA we can see the last flag:
+![App Screenshot](images/lab5_flag3.png)
+
+#### 3rd Flag = bi0s{M3m_l4b5_OVeR_!}
+
+## Goodwork :P
+
 
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
 
 ## License
 
